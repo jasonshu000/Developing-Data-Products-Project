@@ -1,0 +1,61 @@
+Developing Data Products Project
+========================================================
+author: Jason Shu
+date: 9/26/2015
+
+Rolling Dice Simulation
+========================================================
+
+- The purpose of the shiny app is to simulate dice rolls. 
+- The dice can have anywhere between 2 to 20 sides. 
+- Up to 100 of each kind of dice is supported by the app. 
+
+Example
+========================================================
+
+- By default, the app does 100 simulations of rolling two 6-sided dice. 
+- Here's what a frequency distribution of their sums might look like:
+
+```{r, echo=FALSE}
+library(ggplot2)
+x<-sample(1:6,100,replace=TRUE)
+y<-sample(1:6,100,replace=TRUE)
+qplot(x+y,geom="histogram",xlab="sum")
+```
+
+Varying the number of dice
+========================================================
+
+- What happens when we increase the number of dice?
+- The plots below show what happens when the number of dice is increased from three to six. 
+- As you might expect, as the number of dice increases, the distribution becomes closer to a Gaussian distribution. 
+
+```{r, echo=FALSE}
+library(gridExtra)
+a<-sample(1:6,1000,replace=TRUE)
+b<-sample(1:6,1000,replace=TRUE)
+c<-sample(1:6,1000,replace=TRUE)
+d<-sample(1:6,1000,replace=TRUE)
+e<-sample(1:6,1000,replace=TRUE)
+f<-sample(1:6,1000,replace=TRUE)
+p1<-qplot(a+b+c,geom="histogram",main="Three 6-sided dice",xlab="sum")
+p2<-qplot(a+b+c+d,geom="histogram",main="Four 6-sided dice",xlab="sum")
+p3<-qplot(a+b+c+d+e,geom="histogram",main="Five 6-sided dice",xlab="sum")
+p4<-qplot(a+b+c+d+e+f,geom="histogram",main="Six 6-sided dice",xlab="sum")
+grid.arrange(p1,p2,p3,p4,ncol=2)
+```
+
+A more "exotic" example
+========================================================
+
+- What happens if we have three 6-sided dice, one 8-sided die, one 12-sided die, and one 20-sided die?
+
+```{r,echo=FALSE}
+a<-sample(1:6,1000,replace=TRUE)
+b<-sample(1:6,1000,replace=TRUE)
+c<-sample(1:6,1000,replace=TRUE)
+d<-sample(1:8,1000,replace=TRUE)
+e<-sample(1:12,1000,replace=TRUE)
+f<-sample(1:20,1000,replace=TRUE)
+qplot(a+b+c+d+e+f,geom="histogram",xlab="sum")
+```

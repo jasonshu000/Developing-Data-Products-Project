@@ -1,6 +1,7 @@
 sumDice<-function(max,num) sum(sample(1:max,num,replace=TRUE))
 
 library(shiny)
+library(ggplot2)
 shinyServer(
   function(input,output){
     output$hist<-renderPlot({
@@ -29,7 +30,7 @@ shinyServer(
                 sumDice(20,input$i20)
           x<-c(x,temp)
         }
-        hist(x,main="Frequency distribution of sums")
+        qplot(x,geom="histogram",main="Frequency distribution of sums",xlab="sum")
       })
     })
   }
